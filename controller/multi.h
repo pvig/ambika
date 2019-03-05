@@ -73,7 +73,7 @@ struct MultiData {
   
   // Offset: 28-52
   KnobAssignment knob_assignment[8];
-  
+
   // Offset: 52-56
   uint8_t padding2[4];
 };
@@ -89,7 +89,7 @@ enum MultiParameter {
   PRM_MULTI_CLOCK_BPM = 24,
   PRM_MULTI_CLOCK_GROOVE_TEMPLATE = 25,
   PRM_MULTI_CLOCK_GROOVE_AMOUNT = 26,
-  PRM_MULTI_CLOCK_LATCH = 27,
+  PRM_MULTI_CLOCK_LATCH = 27
 };
 
 static const uint8_t kNumStepsInGroovePattern = 16;
@@ -274,7 +274,7 @@ class Multi {
   static uint8_t step() { return step_count_; }
   static uint8_t running() { return running_; }
   static void Touch();
-  
+
   static inline uint8_t flags() {
     uint8_t result = flags_;
     for (uint8_t i = 0; i < kNumParts; ++i) {

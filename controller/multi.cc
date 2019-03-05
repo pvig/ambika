@@ -60,7 +60,7 @@ static const prog_MultiData init_settings PROGMEM = {
   0, 42, 0,
   1, 22, 0,
   1, 42, 0,
-  
+
   // Padding.
   0, 0, 0, 0,
 };

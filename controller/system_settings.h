@@ -44,6 +44,7 @@ struct SystemSettingsData {
   uint8_t swap_leds_colors;
   uint8_t padding[8];
   uint8_t checksum;
+  uint16_t scalaValues[128];
 };
 
 typedef SystemSettingsData PROGMEM prog_SystemSettingsData;
@@ -84,7 +85,9 @@ enum SystemParameter {
   PRM_SYSTEM_SNAP,
   PRM_SYSTEM_AUTOBACKUP,
   PRM_SYSTEM_VOICECARD_LEDS,
-  PRM_SYSTEM_VOICECARD_SWAP_LEDS_COLORS
+  PRM_SYSTEM_VOICECARD_SWAP_LEDS_COLORS,
+  PRM_SYSTEM_SCALA_FILENUM,
+  PRM_SYSTEM_SCALA_ACTIVE
 };
 
 extern SystemSettings system_settings;

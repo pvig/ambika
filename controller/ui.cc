@@ -37,6 +37,7 @@
 #include "controller/ui_pages/sequence_editor.h"
 #include "controller/ui_pages/version_manager.h"
 #include "controller/ui_pages/voice_assigner.h"
+#include "controller/ui_pages/scala_editor.h"
 #include "controller/voicecard_tx.h"
 
 namespace ambika {
@@ -87,12 +88,12 @@ const prog_PageInfo page_registry[] PROGMEM = {
   { PAGE_PART_ARPEGGIATOR,
     &ParameterEditor::event_handlers_,
     { 49, 50, 51, 52, 53, 54, 55, 56 },
-    PAGE_PART_SEQUENCER, 4, 0x0f,
+    PAGE_SYSTEM_SCALA, 4, 0x0f,
   },
   
-  { PAGE_PART_SEQUENCER,
-    &SequenceEditor::event_handlers_,
-    { 0, 0, 0, 0, 0, 0, 0, 0 },
+  { PAGE_SYSTEM_SCALA,
+    &ScalaEditor::event_handlers_,
+    { 75, 76, 0, 0, 0, 0, 0, 0 },
     PAGE_PART, 4, 0xff,
   },
   

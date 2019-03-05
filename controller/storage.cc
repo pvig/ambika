@@ -569,7 +569,12 @@ char* Storage::GetFileName(StorageDir type, const StorageLocation& location) {
     p += strlen(p);
     *p++ = 'A' + (location.bank);
     *p++ = '/';
-  }
+  } else if (type == STORAGE_SCALA) {
+    strcat_P(p, PSTR("/SCALA/"));
+    p += strlen(p);
+    *p++ = 'A' + (location.bank);
+    *p++ = '/';
+  } 
   
   // Name.
   if (type != STORAGE_CLIPBOARD && type != STORAGE_PREVIOUS_CLIPBOARD) {

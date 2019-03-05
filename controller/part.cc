@@ -92,7 +92,7 @@ static const prog_PartData init_part PROGMEM = {
   
   // Arp data
   0, 1, 0, 10,
-  
+  /*
   // Sequence length
   16,
   16,
@@ -124,7 +124,7 @@ static const prog_PartData init_part PROGMEM = {
   60, 100,
   48 | 0x80, 100,
   48, 100,
-  
+  */
   // Padding
   0,
   0,
@@ -133,7 +133,7 @@ static const prog_PartData init_part PROGMEM = {
 };
 
 void Part::Touch() {
-  TouchClock();
+  //TouchClock();
   TouchLfos();
   flags_ = FLAG_HAS_CHANGE;
   
@@ -216,10 +216,10 @@ void Part::RandomizeRange(uint8_t start, uint8_t size) {
   }
 }
 
-void Part::TouchClock() {
+/*void Part::TouchClock() {
   midi_clock_prescaler_ = ResourcesManager::Lookup<uint8_t, uint8_t>(
       midi_clock_tick_per_step, data_.arp_divider);
-}
+}*/
 
 void Part::AssignVoices(uint8_t allocation) {
   AllSoundOff();
@@ -303,7 +303,7 @@ void Part::SetValue(
   
   // Some parameter changes requires an update of some internal book-keeping
   // variables.
-  if (address == PRM_PART_ARP_RESOLUTION) {
+  /*if (address == PRM_PART_ARP_RESOLUTION) {
     TouchClock();
   } else if (address >= PRM_PATCH_ENV_ATTACK && 
              address < PRM_PATCH_VOICE_LFO_SHAPE) {
@@ -311,14 +311,14 @@ void Part::SetValue(
   } else if (address == PRM_PART_ARP_DIRECTION) {
     arp_direction_ = (data_.arp_direction == ARPEGGIO_DIRECTION_DOWN ? -1 : 1);
     StartArpeggio();
-  }
+  }*/
 }
 
 
 void Part::NoteOn(uint8_t note, uint8_t velocity) {
-  if (!AcceptNote(note)) { 
+  /*if (!AcceptNote(note)) { 
     return;
-  }
+  }*/
   if (velocity == 0) {
     NoteOff(note);
   } else {
@@ -591,7 +591,7 @@ void Part::Clock() {
   ++midi_clock_counter_;
   if (midi_clock_counter_ >= midi_clock_prescaler_) {
     midi_clock_counter_ = 0;
-    ClockSequencer();
+    //ClockSequencer();
     ClockArpeggiator();
   }
   
@@ -615,7 +615,7 @@ void Part::Clock() {
 }
 
 void Part::Start() {
-  memset(sequencer_step_, 0, kNumSequences);
+  //memset(sequencer_step_, 0, kNumSequences);
   memset(lfo_step_, 0, kNumLfos);
   midi_clock_counter_ = midi_clock_prescaler_;
   previous_generated_note_ = 0xff;
@@ -636,25 +636,25 @@ uint16_t Part::TuneNote(uint8_t midi_note) const {
       static_cast<int16_t>(midi_note) + S8U8Mul(data_.octave, 12), 0, 127);
   int16_t note = U8U8Mul(n, 128);
   // Apply microtuning.
-  if (data_.raga) {
+  /*if (data_.raga) {
     note += ResourcesManager::Lookup<int16_t, uint8_t>(
         ResourceId(LUT_RES_SCALE_JUST + data_.raga - 1),
         midi_note % 12);
-  }
+  }*/
   // Apply part tuning.
   note += data_.tuning;
   return note;
 }
 
 uint8_t Part::AcceptNote(uint8_t midi_note) const {
-  if (data_.raga) {
+  /*if (data_.raga) {
     int16_t pitch_shift = ResourcesManager::Lookup<int16_t, uint8_t>(
         ResourceId(LUT_RES_SCALE_JUST + data_.raga - 1),
         midi_note % 12);
     if (pitch_shift == 32767) {
       return 0;
     }
-  }
+  }*/
   return 1;
 }
 
@@ -835,7 +835,7 @@ void Part::RetriggerLfos() {
   }
 }
 
-void Part::ClockSequencer() {
+/*void Part::ClockSequencer() {
   // Update the value of the sequencer in the modulation matrix.
   for (uint8_t i = 0; i < 2; ++i) {
     uint8_t value = data_.step_value(i, sequencer_step_[i]);
@@ -881,7 +881,7 @@ void Part::ClockSequencer() {
       sequencer_step_[i] = 0;
     }
   }
-}
+}*/
 
 void Part::ClockArpeggiator() {
   uint16_t pattern = ResourcesManager::Lookup<uint16_t, uint8_t>(

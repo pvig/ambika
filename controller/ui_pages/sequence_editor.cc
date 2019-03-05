@@ -59,24 +59,24 @@ inline const PartData& SequenceEditor::part_data() {
 }
 
 /* static */
-void SequenceEditor::OnInit(PageInfo* info) {
+void SequenceEditor::OnInit(PageInfo* info) {/*
   UiPage::OnInit(info);
   active_control_ = 4;
-  OnIncrement(0);
+  OnIncrement(0);*/
 }
 
 /* static */
-void SequenceEditor::SetActiveControl(ActiveControl active_control) {
+void SequenceEditor::SetActiveControl(ActiveControl active_control) {/*
   if (active_control == ACTIVE_CONTROL_FIRST) {
     step_ = 0;
   } else {
     step_ = 127;
     OnIncrement(-1);
-  }
+  }*/
 }
 
 /* static */
-uint8_t SequenceEditor::OnNote(uint8_t note, uint8_t velocity) {
+uint8_t SequenceEditor::OnNote(uint8_t note, uint8_t velocity) {/*
   if (edit_mode_ != EDIT_IDLE) {
     int8_t step = step_ - 1;
     if (active_control_ >= 4) {
@@ -92,12 +92,12 @@ uint8_t SequenceEditor::OnNote(uint8_t note, uint8_t velocity) {
     return 1;
   } else {
     return 0;
-  }
+  }*/
 }
 
 
 /* static */
-uint8_t SequenceEditor::OnIncrement(int8_t increment) {
+uint8_t SequenceEditor::OnIncrement(int8_t increment) {/*
   if (edit_mode_ == EDIT_IDLE) {
     int8_t step = step_;
     step += increment;
@@ -164,23 +164,23 @@ uint8_t SequenceEditor::OnIncrement(int8_t increment) {
         }
         break;
     }
-  }
+  }*/
   return 1;
 }
 
 /* static */
-uint8_t SequenceEditor::OnClick() {
+uint8_t SequenceEditor::OnClick() {/*
   if (edit_mode_ != EDIT_IDLE) {
     edit_mode_ = EDIT_IDLE;
     active_control_ = 4;
   } else {
     edit_mode_ = EDIT_STARTED_BY_ENCODER;
-  }
+  }*/
   return 1;
 }
 
 /* static */
-uint8_t SequenceEditor::OnPot(uint8_t index, uint8_t value) {
+uint8_t SequenceEditor::OnPot(uint8_t index, uint8_t value) {/*
   int8_t step = step_ - 1;
   active_control_ = index;
   if (index >= 4) {
@@ -204,12 +204,13 @@ uint8_t SequenceEditor::OnPot(uint8_t index, uint8_t value) {
       step = actual_step(step, index - 2);
       mutable_part_data()->set_step_value(index - 2, step, value << 1);
       break;
-  }
+  }*/
   return 1;
 }
 
 /* static */
 uint8_t SequenceEditor::actual_step(uint8_t index, uint8_t sequence) {
+  /*
   uint8_t l = part_data().sequence_length[sequence];
   if (l == 0) {
     return 0;
@@ -218,11 +219,12 @@ uint8_t SequenceEditor::actual_step(uint8_t index, uint8_t sequence) {
       index -= l;
     }
     return index;
-  }
+  }*/
 }
 
 /* static */
 void SequenceEditor::UpdateScreen() {
+  /*
   for (uint8_t i = 0; i < 2; ++i) {
     char* buffer = display.line_buffer(i);
     int8_t step = step_ - 1 + i;
@@ -284,6 +286,7 @@ void SequenceEditor::UpdateScreen() {
     position += index * 10 + 4 + (index >> 1);
     display.set_cursor_position(position);
   }
+  */
 }
 
 }  // namespace ambika

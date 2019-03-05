@@ -32,6 +32,7 @@ static const prog_SystemSettingsData init_settings PROGMEM = {
   0, 0, 1, 0, 1, 1, 1
 };
 
+
 /* static */
 void SystemSettings::Save() {
   data_.checksum = Storage::Checksum(&data_, sizeof(SystemSettingsData) - 1);

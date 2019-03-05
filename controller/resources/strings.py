@@ -58,7 +58,7 @@ spread
 legato
 portamento
 arp/seq
-raga
+scal
 direction
 pattern
 channel
@@ -286,7 +286,7 @@ vca
 lp
 bp
 hp
-nt
+
 free
 env~lfo
 lfo~env

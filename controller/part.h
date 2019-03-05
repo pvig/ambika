@@ -107,11 +107,11 @@ struct PartData {
   //  0..15: step sequence 1
   // 16..31: step sequence 2
   // 32..63: (note value | 0x80 if gate), (note velocity | 0x80 if legato)
-  uint8_t sequence_data[64];
+  //uint8_t sequence_data[64];
   
   // Offset: 80-84
   uint8_t padding[4];
-  
+  /*
   uint8_t step_value(uint8_t sequence, uint8_t step) const {
     return sequence_data[(step + (sequence << 4)) & 0x1f];
   }
@@ -169,6 +169,7 @@ struct PartData {
     n.velocity &= 0x7f;
     return n;
   }
+  */
 };
 
 typedef PartData PROGMEM prog_PartData;
@@ -272,8 +273,8 @@ class Part {
   void RetriggerLfos();
   
   // Called on each "tick" of the arpeggiator and sequencer clock.
-  void ClockSequencer();
-  void ClockArpeggiator();
+  //void ClockSequencer();
+  void ClockArpeggiator(); 
   
   // Called whenever a new arpeggiator note has to be triggered.
   void StartArpeggio();

@@ -51,7 +51,7 @@ List of 22 shrutis with different notation schemes.
 
 The most common notation scheme is in the 3th column.
 ----------------------------------------------------------------------------"""
-
+"""
 shrutis = [
   # Swara ref 1, Swara ref 2, Swara, Swara (carnatic, common), Just, Ratio
   ('S', 'sa', 's', 'C', 1),
@@ -111,9 +111,9 @@ def DecodeShrutiChart(line):
   return ' '.join(decoded)
 
 
-"""----------------------------------------------------------------------------
+""" """----------------------------------------------------------------------------
 A recommended key on the keyboard for each of the swara.
-----------------------------------------------------------------------------"""
+----------------------------------------------------------------------------""" """
 
 recommended_keys = {
   's': 0,
@@ -148,7 +148,7 @@ for entry in shrutis:
 
 
 def Compute(scale):
-  """Translate a list of 12 note/swaras names into pitch corrections."""
+  """ """Translate a list of 12 note/swaras names into pitch corrections.""" """
   values = [shruti_dictionary.get(x) for x in scale.split(' ')]
   equal = 2 ** (numpy.arange(12.0) / 12.0)
   shifts = (numpy.log2(values / equal) * 12 * 128).astype(int)
@@ -159,7 +159,7 @@ def Compute(scale):
 
 
 def LayoutRaga(raga, silence_other_notes=False):
-  """Find a good assignments of swaras to keys for a raga."""
+  """ """Find a good assignments of swaras to keys for a raga.""" """
   raga = raga.lower()
   scale = numpy.zeros((12,))
   mapping = ['' for i in range(12)]
@@ -183,7 +183,7 @@ def LayoutRaga(raga, silence_other_notes=False):
             break
         else:
           mapping[i] = candidates[0]
-    
+
   scale = [shruti_dictionary.get(swara) for swara in mapping]
   return Compute(' '.join(mapping))
 
@@ -253,11 +253,11 @@ scales = [
     ('rasia',
      LayoutRaga(DecodeShrutiChart('s---r---g---mp---d---n'), True)),
 ]
-
+"""
 strings = ''
-for scale, values in scales:
-  strings += '\n' + scale
-  lookup_tables.append(('scale_%s' % scale, values))
+"""for scale, values in scales:"""
+"""  strings += '\n' + scale"""
+"""  lookup_tables.append(('scale_%s' % scale, values))"""
 
 
 """----------------------------------------------------------------------------

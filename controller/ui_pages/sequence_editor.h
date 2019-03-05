@@ -28,7 +28,7 @@ struct PartData;
 
 class SequenceEditor : public UiPage {
  public:
-  SequenceEditor() { }
+  //SequenceEditor() { }
   
   static void OnInit(PageInfo* info);
   static void SetActiveControl(ActiveControl active_control);

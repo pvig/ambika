@@ -483,7 +483,7 @@ static const prog_Parameter parameters[kNumParameters] PROGMEM = {
   // 18
   { PARAMETER_LEVEL_PATCH,
     PRM_PATCH_FILTER1_MODE,
-    UNIT_FILTER_MODE, FILTER_MODE_LP, FILTER_MODE_NOTCH,
+    UNIT_FILTER_MODE, FILTER_MODE_LP, FILTER_MODE_HP,
     1, 0, 0xff, 28,
     STR_RES_MODE, STR_RES_MODE, STR_RES_FILTER_1 },
 
@@ -504,7 +504,7 @@ static const prog_Parameter parameters[kNumParameters] PROGMEM = {
   // 21
   { PARAMETER_LEVEL_PATCH,
     PRM_PATCH_FILTER2_MODE,
-    UNIT_FILTER_MODE, FILTER_MODE_LP, FILTER_MODE_NOTCH,
+    UNIT_FILTER_MODE, FILTER_MODE_LP, FILTER_MODE_HP,
     1, 0, 0xff, 31,
     STR_RES_MODE, STR_RES_MODE, STR_RES_FILTER_2 },
   
@@ -682,7 +682,7 @@ static const prog_Parameter parameters[kNumParameters] PROGMEM = {
     PRM_PART_RAGA,
     UNIT_RAGA, 0, 31,
     1, 0, 0xff, 0xff,
-    STR_RES_RAGA, STR_RES_RAGA, STR_RES_PART },
+    STR_RES_SPRD, STR_RES_SPREAD, STR_RES_PART },
   
   // 47
   { PARAMETER_LEVEL_PART,
@@ -879,6 +879,20 @@ static const prog_Parameter parameters[kNumParameters] PROGMEM = {
     UNIT_INT8, -63, 63,
     1, 0, 0xff, 109,
     STR_RES_KEYBTVCF, STR_RES_KEYBTVCF, STR_RES_FILTER_1 },
+
+  // 75
+  { PARAMETER_LEVEL_SYSTEM,
+    PRM_SYSTEM_SCALA_FILENUM,
+    UNIT_UINT8, 0, 127,
+    1, 0, 0xff, 0xff,
+    STR_RES_SCAL, STR_RES_SCAL, STR_RES_SYSTEM },
+
+  // 76
+  { PARAMETER_LEVEL_SYSTEM,
+    PRM_SYSTEM_SCALA_ACTIVE,
+    UNIT_BOOLEAN, 0, 1,
+    1, 0, 0xff, 0xff,
+    STR_RES_ON, STR_RES_ON, STR_RES_SYSTEM },
 };
 
 /* static */
