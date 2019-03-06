@@ -46,7 +46,7 @@ const prog_EventHandlers ScalaEditor::event_handlers_ PROGMEM = {
 
 /* <static> */
 ScalaAction ScalaEditor::action_;
-StorageLocation ScalaEditor::location_ = { STORAGE_OBJECT_PROGRAM, 0, 0 };
+StorageLocation ScalaEditor::location_ = { STORAGE_OBJECT_SCALA, 0, 0 };
 char ScalaEditor::name_[16];
 /* </static> */
 
@@ -65,9 +65,7 @@ void ScalaEditor::OnInit(PageInfo* info) {
 void ScalaEditor::Browse() {
   action_ = SCALA_ACTION_BROWSE;
   location_.name = name_;
-  edit_mode_ = EDIT_IDLE;
   active_control_ = 1;
-
   if (storage.LoadName(location_) != FS_OK) {
     memcpy_P(name_, blank_patch_name, sizeof(name_));
   }
@@ -75,21 +73,19 @@ void ScalaEditor::Browse() {
 
 /* static */
 uint8_t ScalaEditor::OnIncrement(int8_t increment) {
-  if (action_ == SCALA_ACTION_BROWSE ||
-      edit_mode_ == EDIT_STARTED_BY_ENCODER) {
-    if (active_control_ == 0) {
-      int8_t bank = location_.bank;
-      location_.bank = Clip(bank + increment, 0, 25);
-    } else if (active_control_ == 1){
+  if (action_ == SCALA_ACTION_BROWSE) {
       int16_t slot = location_.slot;
       location_.slot = Clip(location_.slot + increment, 0, 127);
-    } else {
-      char character = name_[active_control_ - 2];
-      character = Clip(character + increment, 32, 127);
-      name_[active_control_ - 2] = character;
-    }
+
+    //if (location_.bank_slot() != loaded_objects_indices_[location_.index()]) {
+      
+      if (storage.Load(location_) != FS_OK) {
+        memcpy_P(name_, blank_patch_name, sizeof(name_));
+      }
+
+    //}
   }
-  
+
   return 1;
 }
 
@@ -194,22 +190,7 @@ void ScalaEditor::UpdateScreen() {
     strncpy_P(&buffer[28], PSTR("save|cancel"), 11);
     buffer[32] = kDelimiter;
   }
-  
-  // And now the cursor.
-  if (action_ == LIBRARY_ACTION_SAVE) {
-    display.set_cursor_character(edit_mode_ == EDIT_IDLE ? 0xff : '_');
-  } else {
-    display.set_cursor_character(' ');
-  }
-  
-  if (active_control_ == 0) {
-    display.set_cursor_position(16);
-  } else if (active_control_ == 1) {
-    display.set_cursor_position(
-        action_ == LIBRARY_ACTION_SAVE ? 19 : kLcdNoCursor);
-  } else {
-    display.set_cursor_position(19 + active_control_);
-  }
+
 }
 
 /* static */

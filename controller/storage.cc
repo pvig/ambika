@@ -572,8 +572,6 @@ char* Storage::GetFileName(StorageDir type, const StorageLocation& location) {
   } else if (type == STORAGE_SCALA) {
     strcat_P(p, PSTR("/SCALA/"));
     p += strlen(p);
-    *p++ = 'A' + (location.bank);
-    *p++ = '/';
   } 
   
   // Name.

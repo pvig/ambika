@@ -38,6 +38,7 @@ enum StorageObject {
   STORAGE_OBJECT_PROGRAM,
   STORAGE_OBJECT_MULTI,
   STORAGE_OBJECT_PART,
+  STORAGE_OBJECT_SCALA
 };
 
 enum SysExReceptionState {

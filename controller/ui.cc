@@ -34,7 +34,6 @@
 #include "controller/ui_pages/os_info_page.h"
 #include "controller/ui_pages/parameter_editor.h"
 #include "controller/ui_pages/performance_page.h"
-#include "controller/ui_pages/sequence_editor.h"
 #include "controller/ui_pages/version_manager.h"
 #include "controller/ui_pages/voice_assigner.h"
 #include "controller/ui_pages/scala_editor.h"
