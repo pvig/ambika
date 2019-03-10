@@ -17,11 +17,12 @@
 //
 // Special UI page for scala parameters.
 
-#ifndef CONTROLLER_UI_PAGES_SCALA_EDITOR_H_
-#define CONTROLLER_UI_PAGES_SCALA_EDITOR_H_
+#ifndef CONTROLLER_UI_PAGES_SCALA_PAGE_H_
+#define CONTROLLER_UI_PAGES_SCALA_PAGE_H_
 
 #include "controller/storage.h"
 #include "controller/ui_pages/ui_page.h"
+#include "avrlib/filesystem/directory.h"
 
 namespace ambika {
 
@@ -30,9 +31,9 @@ enum ScalaAction {
   SCALA_ACTION_LOAD
 };
 
-class ScalaEditor : public UiPage {
+class ScalaPage : public UiPage {
  public:
-  ScalaEditor() { }
+  ScalaPage() { }
   
   static void OnInit(PageInfo* info);
   static void SetActiveControl(ActiveControl active_control);
@@ -54,10 +55,13 @@ class ScalaEditor : public UiPage {
 
   static void PrintActiveObjectName(char* buffer);
   static void UpdateLocation();
+  static char const* filename_;
+  static FRESULT getFileInfo(char* path, uint8_t filepos);
 
  private:
   static void Browse();
   static void ShowDiskErrorMessage();
+  static void GetReadErrorCode();
 
   static uint8_t OnKeyBrowse(uint8_t key);
   static uint8_t OnKeySave(uint8_t key);
@@ -67,7 +71,15 @@ class ScalaEditor : public UiPage {
 
   static char name_[16];
   
-  DISALLOW_COPY_AND_ASSIGN(ScalaEditor);
+  //static FRESULT dirStatus_;
+  //static DIR dir_;
+  static char* dirpath_;
+  //static FILINFO fileInfos_;
+  static FilesystemStatus fileStatus_;
+  static char* readStatus_;
+  static Directory directory_;
+
+  DISALLOW_COPY_AND_ASSIGN(ScalaPage);
 };
 
 }  // namespace ambika

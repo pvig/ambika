@@ -36,7 +36,7 @@
 #include "controller/ui_pages/performance_page.h"
 #include "controller/ui_pages/version_manager.h"
 #include "controller/ui_pages/voice_assigner.h"
-#include "controller/ui_pages/scala_editor.h"
+#include "controller/ui_pages/scala_page.h"
 #include "controller/voicecard_tx.h"
 
 namespace ambika {
@@ -91,7 +91,7 @@ const prog_PageInfo page_registry[] PROGMEM = {
   },
   
   { PAGE_SYSTEM_SCALA,
-    &ScalaEditor::event_handlers_,
+    &ScalaPage::event_handlers_,
     { 75, 76, 0, 0, 0, 0, 0, 0 },
     PAGE_PART, 4, 0xff,
   },
