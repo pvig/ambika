@@ -47,21 +47,20 @@ class ScalaPage : public UiPage {
   
   static const prog_EventHandlers event_handlers_;
 
-  static char const* filename_;
 
  private:
   static void Browse();
-  static void GetReadErrorCode();
 
   static uint8_t OnKeyBrowse(uint8_t key);
   static uint8_t OnKeySave(uint8_t key);
   
   static ScalaAction action_;
-  static StorageLocation location_;
+  static uint8_t location_;
 
   static char name_[16];
+  static const char* filename_;
   
-  static char* dirpath_;
+  static const char* dirpath_;
   static FilesystemStatus fileStatus_;
   static char* readStatus_;
   static Directory directory_;
@@ -71,4 +70,4 @@ class ScalaPage : public UiPage {
 
 }  // namespace ambika
 
-#endif  // CONTROLLER_UI_PAGES_LIBRARY_H_
+#endif  // CONTROLLER_UI_PAGES_SCALA_PAGE_H_

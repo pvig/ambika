@@ -26,7 +26,7 @@
 
 #include "controller/ui_pages/parameter_editor.h"
 #include "avrlib/filesystem/directory.h"
-#include "avrlib/filesystem/filesystem.h"
+//#include "avrlib/filesystem/filesystem.h"
 
 namespace ambika {
 
@@ -47,12 +47,12 @@ const prog_EventHandlers ScalaPage::event_handlers_ PROGMEM = {
 
 /* <static> */
 ScalaAction ScalaPage::action_;
-StorageLocation ScalaPage::location_ = { STORAGE_OBJECT_SCALA, 0, 0 };
+uint8_t ScalaPage::location_ = 0;
 char ScalaPage::name_[16];
-char const* ScalaPage::filename_;
+const char* ScalaPage::filename_;
 Directory ScalaPage::directory_;
 char* ScalaPage::readStatus_;
-char* ScalaPage::dirpath_ = "/SCALA";
+const char* ScalaPage::dirpath_ = "/";
 FilesystemStatus ScalaPage::fileStatus_;
 /* </static> */
 
@@ -64,7 +64,11 @@ void ScalaPage::OnInit(PageInfo* info) {
     readStatus_ = "bad init";
   } else {
     fileStatus_ = directory_.Open(dirpath_, 1000);
-    Browse();
+    if (fileStatus_ != FS_OK) {
+      readStatus_ = "bad open";
+    } else {
+      Browse();
+    }
   }
 }
 
@@ -77,23 +81,24 @@ void ScalaPage::Browse() {
 /* static */
 uint8_t ScalaPage::OnIncrement(int8_t increment) {
   if (action_ == SCALA_ACTION_BROWSE) {
-      int16_t slot = location_.slot;
-      location_.slot = Clip(location_.slot + increment, 0, 127);
+      location_ = Clip(location_ + increment, 0, 127);
 
       fileStatus_ = directory_.Next();
 
-      if(directory_.done()) {
+      /*if(directory_.done()) {
         fileStatus_ = directory_.Rewind();
-      }
+        readStatus_ = "read done";
+      } */
+      //{
+        if(fileStatus_==FS_OK) {
+          readStatus_="ok";
+          filename_ = directory_.entry().name();
+        } else {
+          readStatus_ = "read error";
+          //filename_ = "";
+        }
+      //}
 
-      if(fileStatus_==FS_OK) {
-        readStatus_="ok";
-        //filename_ = directory_.entry().name();
-        filename_ = directory_.entry().file_info.fname;
-      } else {
-        readStatus_ = "read error";
-        filename_ = "";
-      }
   }
   return 1;
 }
@@ -125,7 +130,7 @@ void ScalaPage::UpdateScreen() {
   // First line: 
   char* buffer = display.line_buffer(0) + 1;
 
-  UnsafeItoa<int16_t>((location_.slot+1), 3, &buffer[0]);
+  UnsafeItoa<int16_t>((location_+1), 3, &buffer[0]);
   PadRight(&buffer[0], 3, ' ');
 
   strncpy(&buffer[6], readStatus_, 10);
@@ -133,10 +138,9 @@ void ScalaPage::UpdateScreen() {
 
   // Second line: 
   buffer = display.line_buffer(1) + 1;
-  strncpy_P(&buffer[12], filename_, sizeof(filename_));
+  strncpy(&buffer[12], filename_, strlen(filename_));
   //PadRight(&buffer[12], 10, ' ');
   //memcpy_P(name_, blank_patch_name, sizeof(name_));
-
 
 }
 
