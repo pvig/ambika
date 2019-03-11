@@ -46,21 +46,11 @@ class ScalaPage : public UiPage {
   static void UpdateLeds();
   
   static const prog_EventHandlers event_handlers_;
-  
-  static void OnDialogClosed(uint8_t dialog_id, uint8_t return_value);
-  static void SaveState() {}
 
-  static StorageLocation* mutable_location() { return &location_; }
-  static const StorageLocation& location() { return location_; }
-
-  static void PrintActiveObjectName(char* buffer);
-  static void UpdateLocation();
   static char const* filename_;
-  static FRESULT getFileInfo(char* path, uint8_t filepos);
 
  private:
   static void Browse();
-  static void ShowDiskErrorMessage();
   static void GetReadErrorCode();
 
   static uint8_t OnKeyBrowse(uint8_t key);
@@ -71,10 +61,7 @@ class ScalaPage : public UiPage {
 
   static char name_[16];
   
-  //static FRESULT dirStatus_;
-  //static DIR dir_;
   static char* dirpath_;
-  //static FILINFO fileInfos_;
   static FilesystemStatus fileStatus_;
   static char* readStatus_;
   static Directory directory_;
