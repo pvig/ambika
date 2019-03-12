@@ -37,6 +37,7 @@ uint8_t Multi::running_;
 uint8_t Multi::idle_ticks_;
 uint16_t Multi::tick_duration_table_[kNumStepsInGroovePattern];
 uint8_t Multi::flags_;
+uint16_t Multi::scalaValues[128];
 /* </static> */
 
 static const prog_MultiData init_settings PROGMEM = {

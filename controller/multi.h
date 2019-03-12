@@ -318,7 +318,8 @@ class Multi {
   static MultiData data_;
   static Part parts_[kNumParts];
   static uint8_t flags_;
-  
+  static uint16_t scalaValues[128];
+
   DISALLOW_COPY_AND_ASSIGN(Multi);
 };
 

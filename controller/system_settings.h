@@ -43,8 +43,9 @@ struct SystemSettingsData {
   uint8_t voicecard_leds;
   uint8_t swap_leds_colors;
   uint8_t padding[8];
+  uint8_t scala_filenum;
+  uint8_t scala_active;
   uint8_t checksum;
-  uint16_t scalaValues[128];
 };
 
 typedef SystemSettingsData PROGMEM prog_SystemSettingsData;

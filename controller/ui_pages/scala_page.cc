@@ -1,21 +1,5 @@
-// Copyright 2011 Olivier Gillet.
-//
-// Author: Olivier Gillet (ol.gillet@gmail.com)
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//
-// -----------------------------------------------------------------------------
-//
-// Special UI page for loading/saving operations.
+
+// Special UI page for scala operations.
 
 #include "controller/ui_pages/scala_page.h"
 
@@ -52,10 +36,9 @@ char ScalaPage::name_[16];
 const char* ScalaPage::filename_;
 Directory ScalaPage::directory_;
 char* ScalaPage::readStatus_;
-const char* ScalaPage::dirpath_ = "/";
+const char* ScalaPage::dirpath_ = "/SCALA";
 FilesystemStatus ScalaPage::fileStatus_;
 /* </static> */
-
 
 /* static */
 void ScalaPage::OnInit(PageInfo* info) {
@@ -93,6 +76,7 @@ uint8_t ScalaPage::OnIncrement(int8_t increment) {
         if(fileStatus_==FS_OK) {
           readStatus_="ok";
           filename_ = directory_.entry().name();
+          
         } else {
           readStatus_ = "read error";
           //filename_ = "";
