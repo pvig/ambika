@@ -133,7 +133,7 @@ static const prog_PartData init_part PROGMEM = {
 };
 
 void Part::Touch() {
-  //TouchClock();
+  TouchClock();
   TouchLfos();
   flags_ = FLAG_HAS_CHANGE;
   
@@ -216,10 +216,10 @@ void Part::RandomizeRange(uint8_t start, uint8_t size) {
   }
 }
 
-/*void Part::TouchClock() {
+void Part::TouchClock() {
   midi_clock_prescaler_ = ResourcesManager::Lookup<uint8_t, uint8_t>(
       midi_clock_tick_per_step, data_.arp_divider);
-}*/
+}
 
 void Part::AssignVoices(uint8_t allocation) {
   AllSoundOff();
@@ -303,7 +303,7 @@ void Part::SetValue(
   
   // Some parameter changes requires an update of some internal book-keeping
   // variables.
-  /*if (address == PRM_PART_ARP_RESOLUTION) {
+  if (address == PRM_PART_ARP_RESOLUTION) {
     TouchClock();
   } else if (address >= PRM_PATCH_ENV_ATTACK && 
              address < PRM_PATCH_VOICE_LFO_SHAPE) {
@@ -311,7 +311,7 @@ void Part::SetValue(
   } else if (address == PRM_PART_ARP_DIRECTION) {
     arp_direction_ = (data_.arp_direction == ARPEGGIO_DIRECTION_DOWN ? -1 : 1);
     StartArpeggio();
-  }*/
+  }
 }
 
 
