@@ -260,6 +260,7 @@ static const prog_char str_res_frequency[] PROGMEM = "frequency";
 static const prog_char str_res_lp[] PROGMEM = "lp";
 static const prog_char str_res_bp[] PROGMEM = "bp";
 static const prog_char str_res_hp[] PROGMEM = "hp";
+static const prog_char str_res_nt[] PROGMEM = "nt";
 static const prog_char str_res_free[] PROGMEM = "free";
 static const prog_char str_res_envTlfo[] PROGMEM = "env~lfo";
 static const prog_char str_res_lfoTenv[] PROGMEM = "lfo~env";
@@ -605,6 +606,7 @@ PROGMEM const prog_char* const string_table[] = {
   str_res_lp,
   str_res_bp,
   str_res_hp,
+  str_res_nt,
   str_res_free,
   str_res_envTlfo,
   str_res_lfoTenv,
