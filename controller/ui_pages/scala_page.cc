@@ -4,7 +4,7 @@
 #include "controller/ui_pages/scala_page.h"
 
 #include "avrlib/string.h"
-
+#include "controller/storage.h"
 #include "controller/display.h"
 #include "controller/leds.h"
 
@@ -36,19 +36,24 @@ char ScalaPage::name_[16];
 const char* ScalaPage::filename_;
 Directory ScalaPage::directory_;
 char* ScalaPage::readStatus_;
-const char* ScalaPage::dirpath_ = "/SCALA";
-FilesystemStatus ScalaPage::fileStatus_;
+char ScalaPage::dirpath_[7]="/SCALA";
+FilesystemStatus ScalaPage::fileStatus_=FS_NOT_OPENED;
 /* </static> */
 
 /* static */
 void ScalaPage::OnInit(PageInfo* info) {
   UiPage::OnInit(info);
-  if (storage.InitFilesystem() != FS_OK) {
+
+  uint8_t initStatus = storage.InitFilesystem();
+
+  readStatus_ = "init ok";
+  if (initStatus != FS_OK) {
     readStatus_ = "bad init";
   } else {
     fileStatus_ = directory_.Open(dirpath_, 1000);
+    filename_ =  dirpath_;
     if (fileStatus_ != FS_OK) {
-      readStatus_ = "bad open";
+      readStatus_ = "bad open ";
     } else {
       Browse();
     }
@@ -68,20 +73,18 @@ uint8_t ScalaPage::OnIncrement(int8_t increment) {
 
       fileStatus_ = directory_.Next();
 
-      /*if(directory_.done()) {
+      if(directory_.done()) {
         fileStatus_ = directory_.Rewind();
         readStatus_ = "read done";
-      } */
-      //{
-        if(fileStatus_==FS_OK) {
-          readStatus_="ok";
-          filename_ = directory_.entry().name();
-          
-        } else {
-          readStatus_ = "read error";
-          //filename_ = "";
-        }
-      //}
+      } 
+
+      if(fileStatus_==FS_OK) {
+        readStatus_="ok";
+        filename_ = directory_.entry().name();
+      } else {
+        readStatus_ = "nok";
+      }
+
 
   }
   return 1;
@@ -123,8 +126,6 @@ void ScalaPage::UpdateScreen() {
   // Second line: 
   buffer = display.line_buffer(1) + 1;
   strncpy(&buffer[12], filename_, strlen(filename_));
-  //PadRight(&buffer[12], 10, ' ');
-  //memcpy_P(name_, blank_patch_name, sizeof(name_));
 
 }
 

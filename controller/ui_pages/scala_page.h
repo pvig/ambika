@@ -20,13 +20,14 @@
 #ifndef CONTROLLER_UI_PAGES_SCALA_PAGE_H_
 #define CONTROLLER_UI_PAGES_SCALA_PAGE_H_
 
-#include "controller/storage.h"
+
 #include "controller/ui_pages/ui_page.h"
 #include "avrlib/filesystem/directory.h"
 
 namespace ambika {
 
 enum ScalaAction {
+  SCALA_ACTION_INIT,
   SCALA_ACTION_BROWSE,
   SCALA_ACTION_LOAD
 };
@@ -60,7 +61,7 @@ class ScalaPage : public UiPage {
   static char name_[16];
   static const char* filename_;
   
-  static const char* dirpath_;
+  static char dirpath_[7];
   static FilesystemStatus fileStatus_;
   static char* readStatus_;
   static Directory directory_;
