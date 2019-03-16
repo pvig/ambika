@@ -44,20 +44,20 @@ FilesystemStatus ScalaPage::fileStatus_=FS_NOT_OPENED;
 void ScalaPage::OnInit(PageInfo* info) {
   UiPage::OnInit(info);
 
-  uint8_t initStatus = storage.InitFilesystem();
-
+  //uint8_t initStatus = storage.InitFilesystem();
+/*
   readStatus_ = "init ok";
   if (initStatus != FS_OK) {
     readStatus_ = "bad init";
   } else {
-    fileStatus_ = directory_.Open(dirpath_, 1000);
+    fileStatus_ = directory_.Open("/", 1000);
     filename_ =  dirpath_;
     if (fileStatus_ != FS_OK) {
       readStatus_ = "bad open ";
     } else {
       Browse();
     }
-  }
+  }*/
 }
 
 /* static */

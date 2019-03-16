@@ -89,7 +89,7 @@ enum MultiParameter {
   PRM_MULTI_CLOCK_BPM = 24,
   PRM_MULTI_CLOCK_GROOVE_TEMPLATE = 25,
   PRM_MULTI_CLOCK_GROOVE_AMOUNT = 26,
-  PRM_MULTI_CLOCK_LATCH = 27
+  PRM_MULTI_CLOCK_LATCH = 27,
 };
 
 static const uint8_t kNumStepsInGroovePattern = 16;

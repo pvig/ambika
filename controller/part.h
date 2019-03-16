@@ -110,7 +110,7 @@ struct PartData {
   //uint8_t sequence_data[64];
   
   // Offset: 80-84
-  uint8_t padding[4];
+  //uint8_t padding[2];
   /*
   uint8_t step_value(uint8_t sequence, uint8_t step) const {
     return sequence_data[(step + (sequence << 4)) & 0x1f];
@@ -187,9 +187,6 @@ enum PartParameter {
   PRM_PART_ARP_OCTAVE,
   PRM_PART_ARP_PATTERN,
   PRM_PART_ARP_RESOLUTION,
-  PRM_PART_SEQUENCE_LENGTH_1,
-  PRM_PART_SEQUENCE_LENGTH_2,
-  PRM_PART_SEQUENCE_LENGTH_3,
   PRM_PART_POLYPHONY_MODE
 };
 

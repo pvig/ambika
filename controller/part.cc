@@ -316,9 +316,9 @@ void Part::SetValue(
 
 
 void Part::NoteOn(uint8_t note, uint8_t velocity) {
-  /*if (!AcceptNote(note)) { 
+  if (!AcceptNote(note)) { 
     return;
-  }*/
+  }
   if (velocity == 0) {
     NoteOff(note);
   } else {
@@ -615,7 +615,7 @@ void Part::Clock() {
 }
 
 void Part::Start() {
-  //memset(sequencer_step_, 0, kNumSequences);
+  memset(sequencer_step_, 0, kNumSequences);
   memset(lfo_step_, 0, kNumLfos);
   midi_clock_counter_ = midi_clock_prescaler_;
   previous_generated_note_ = 0xff;

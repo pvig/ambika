@@ -483,7 +483,7 @@ static const prog_Parameter parameters[kNumParameters] PROGMEM = {
   // 18
   { PARAMETER_LEVEL_PATCH,
     PRM_PATCH_FILTER1_MODE,
-    UNIT_FILTER_MODE, FILTER_MODE_LP, FILTER_MODE_HP,
+    UNIT_FILTER_MODE, FILTER_MODE_LP, FILTER_MODE_NOTCH,
     1, 0, 0xff, 28,
     STR_RES_MODE, STR_RES_MODE, STR_RES_FILTER_1 },
 
@@ -504,7 +504,7 @@ static const prog_Parameter parameters[kNumParameters] PROGMEM = {
   // 21
   { PARAMETER_LEVEL_PATCH,
     PRM_PATCH_FILTER2_MODE,
-    UNIT_FILTER_MODE, FILTER_MODE_LP, FILTER_MODE_HP,
+    UNIT_FILTER_MODE, FILTER_MODE_LP, FILTER_MODE_NOTCH,
     1, 0, 0xff, 31,
     STR_RES_MODE, STR_RES_MODE, STR_RES_FILTER_2 },
   
@@ -679,9 +679,9 @@ static const prog_Parameter parameters[kNumParameters] PROGMEM = {
   
   // 46
   { PARAMETER_LEVEL_PART,
-    PRM_PART_RAGA,
-    UNIT_RAGA, 0, 31,
-    1, 0, 0xff, 0xff,
+    PRM_PART_TUNING_SPREAD,
+    UNIT_UINT8, 0, 40,
+    1, 0, 0xff, 95,
     STR_RES_SPRD, STR_RES_SPREAD, STR_RES_PART },
   
   // 47
